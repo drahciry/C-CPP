@@ -37,7 +37,7 @@ int is_int(const char* str) {
     // Verifica se o primeiro caractere é um sinal
     if (*p == '+' || *p == '-') p++;
     // Captura o integer e vê se tem mais algo na string
-    strtol(p, &end);
+    strtol(p, &end, 10);
     while (isspace(*end)) end++;
     // Retorna diferente de 0 caso seja integer
     return *p != '\0' && *end == '\0';
