@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_STUDENT 100
+#define MAX_LINE 256
+
 // Declaração de variáveis globais
 int g_matricula = 202500001;
 
@@ -9,7 +12,7 @@ int g_matricula = 202500001;
 typedef struct {
     int matricula;
     char* nome;
-    float nota;
+    float score;
 } Aluno;
 
 // Realiza a leitura do teclado de forma dinâmica
@@ -45,7 +48,7 @@ char* readline() {
 
 // Função que cria arquivo ou abre arquivo (excluindo tudo)
 // E adiciona texto ao arquivo
-void writeFile(char* text, char* path) {
+void writeFile(char* text, const char* path) {
     // Declaração de variáveis
     FILE* file = fopen(path, "w");
     // Encerra o programa caso falhe a abertura do arquivo
@@ -60,7 +63,7 @@ void writeFile(char* text, char* path) {
 }
 
 // Função que abre um arquivo e adiciona texto ao final do arquivo
-void appendFile(char* text, char* path) {
+void appendFile(char* text, const char* path) {
     // Declaração de variáveis
     FILE* file = fopen(path, "a");
     // Encerra o programa caso falhe a abertura do arquivo
@@ -75,7 +78,7 @@ void appendFile(char* text, char* path) {
 }
 
 // Função que lê conteúdo do arquivo
-char* readFile(char* path) {
+char* readFile(const char* path) {
     // Declaração de variáveis
     int ch, len = 0, cap = 10;
     char* text = malloc(cap);
@@ -122,7 +125,7 @@ Aluno cadastrarAluno() {
     printf("Insira o nome do aluno: ");
     a.nome = readline();
     printf("Insira a nota do aluno: ");
-    scanf("%f", &a.nota);
+    scanf("%f", &a.score);
     while (getchar() != '\n');
     printf("Aluno cadastrado com sucesso!\n");
     return a;
@@ -130,9 +133,9 @@ Aluno cadastrarAluno() {
 
 // Função para exibir 
 void exibirAluno(Aluno* a) {
-    printf("Matrícula do aluno: %05d\n", a->matricula);
+    printf("Matrícula do aluno: %d\n", a->matricula);
     printf("Nome do aluno: %s\n", a->nome);
-    printf("Nota do aluno: %.2f\n", a->nota);
+    printf("Nota do aluno: %.2f\n", a->score);
 }
 
 // Função que transforma toda string em lower case
@@ -164,13 +167,13 @@ int binarySearch(Aluno* a, int len, int target) {
 }
 
 // Função para construir texto que será salvo em arquivo .txt
-char* buildText(int matricula, char* nome, float nota) {
+char* buildText(int matricula, char* nome, float score) {
     // Declaração de variáveis
     char* result;
     int len;
 
     // Tamanho da linha que será salva
-    len = 9 + strlen(nome) + 5 + 2; // 9 para a matrícula, strlen(nome) para tamanho do nome, 5 para nota e 2 para ';'
+    len = 9 + strlen(nome) + 5 + 2; // 9 para a matrícula, strlen(nome) para tamanho do nome, 5 para score e 2 para ';'
     result = malloc(len);
     // Encerra o programa caso falhe a alocação de memória
     if (!result) {
@@ -178,17 +181,47 @@ char* buildText(int matricula, char* nome, float nota) {
         exit(6);
     }
     // Salva todas as informações em um ponteiro auxiliar que será retornado
-    snprintf(result, len, "%d;%s;%.2f", matricula, nome, nota);
+    snprintf(result, len, "%d;%s;%.2f", matricula, nome, score);
     return result;
+}
+
+// Função para buscar aluno por nome no arquivo CSV
+void searchStudent(char* targetName, const char* path) {
+    // Declaração de variáveis
+    FILE* file = fopen(path, "r");
+    char line[MAX_LINE];
+    int current_line = 0, founded = 0;
+
+    // Realiza leitura linha por linha
+    while (fgets(line, sizeof(line), file) && !founded) {
+        current_line++;
+        // Pula primeira linha de cabeçalho
+        if (current_line == 1) continue;
+        // Quebra a linha por um token (";")
+        char* matricula = strtok(line, ";");
+        char* name = strtok(NULL, ";");
+        char* score = strtok(NULL, ";");
+        // Verifica se encontrou o aluno
+        if (name && !strcmp(name, targetName)) {
+            printf("Matrícula do aluno: %s\n", matricula);
+            printf("Nome do aluno: %s\n", name);
+            printf("Nota do aluno: %s", score);
+            founded = 1;
+        }
+    }
+    // Caso não encontre, exibe mensagem
+    if (!founded)
+        printf("Aluno não encontrado.\n");    
 }
  
 int main() {
     // Declaração de variáveis
-    char* path = "alunos.csv";
+    const char* path = "alunos.csv";
     char* text;
+    char* name;
     int option, search, target;
     int index = 0, cap = 0, key = 1;
-    Aluno alunos[100];
+    Aluno* alunos = malloc(MAX_STUDENT * sizeof(Aluno));
 
     // Inicializa o arquivo zerado
     writeFile("Matrícula;Nome;Nota", path);
@@ -198,7 +231,8 @@ int main() {
             "\nOpções disponíveis:\n"
             "[1] Cadastrar aluno\n"
             "[2] Buscar aluno por matrícula\n"
-            "[3] Salvar alunos\n"
+            "[3] Buscar aluno por nome\n"
+            "[4] Salvar alunos\n"
             "[0] Encerrar programa\n"
             "\nInsira a ação desejada: "
         );
@@ -208,6 +242,10 @@ int main() {
         switch (option) {
             // Cadastra aluno
             case 1:
+                if (cap == MAX_STUDENT) {
+                    printf("Turma cheia.\n");
+                    break;
+                }
                 alunos[cap++] = cadastrarAluno();
                 break;
             // Exibe aluno
@@ -225,12 +263,20 @@ int main() {
                 }
                 exibirAluno(&alunos[search]);
                 break;
-            // Salva alunos em arquivo CSV de alunos
+            // Busca aluno por nome no arquivo
             case 3:
+                printf("Insira o nome do aluno que deseja encontrar: ");
+                name = readline();
+                printf("\n");
+                searchStudent(name, path);
+                free(name);
+                break;
+            // Salva alunos em arquivo CSV de alunos
+            case 4:
                 // Percorre array de alunos a partir de onde parou
                 for (; index < cap; index++) {
                     // Monta linha que será adicionada ao arquivo
-                    text = buildText(alunos[index].matricula, alunos[index].nome, alunos[index].nota);
+                    text = buildText(alunos[index].matricula, alunos[index].nome, alunos[index].score);
                     // Adiciona linha ao arquivo
                     appendFile(text, path);
                     free(text);
@@ -249,5 +295,6 @@ int main() {
     }
     // Desaloca nome dos alunos da memória
     for (int i = 0; i < cap; i++) free(alunos[i].nome);
+    free(alunos);
     return 0;
 }
