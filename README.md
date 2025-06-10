@@ -1,4 +1,5 @@
-# C-C-
+# C-C++
+
 My repository for algorithms and programing logical in programing language C/C++. Only training.
 
 ## Update 10/06/2025
