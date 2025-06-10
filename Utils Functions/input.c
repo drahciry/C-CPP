@@ -72,3 +72,12 @@ int is_double(const char* str) {
     // Retorna diferente de 0 caso seja double
     return *p != '\0' && *end == '\0';
 }
+
+// Função que transforma toda string em lower case
+void lower(char* string) {
+    for (int i = 0; string[i] != '\0'; i++) {
+        if (string[i] >= 65 && string[i] <= 90) {
+            string[i] = (string[i] % 65) + 97;
+        }
+    }
+}
