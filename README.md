@@ -13,3 +13,7 @@ My repository for algorithms and programing logical in programing language C/C++
 ## Update 10/06/2025 - 1.3
 
 - I make programs using structures of control (switch-case, for, while, do-while) for show that I know this topic so important in programing.
+
+## Update 12/06/2025
+
+- I make programs showing that I know utilize arrays, strings and functions with recursion. These topic is very important for stable development in C/C++.
