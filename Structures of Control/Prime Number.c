@@ -21,6 +21,7 @@ int main() {
             break;
         }
     }
+    if (value == 1) prime = 0;
     // Exibe o resultado da verificação
     printf("O valor %d inserido %s!\n", value, prime ? "é primo" : "não é primo");
     return 0;
