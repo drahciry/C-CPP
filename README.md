@@ -21,3 +21,7 @@ My repository for algorithms and programing logical in programing language C/C++
 ## Update 12/06/2025 - 1.2
 
 - I was edited 'Phrase Analyzer' because I forgot the cases where vowels are capitalize. I append too new program with focus in strings. I plan to add more.
+
+## Update 13/06/2025
+
+- I have created more programs for strings. There will be more programs with this focus.
