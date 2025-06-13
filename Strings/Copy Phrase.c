@@ -11,6 +11,7 @@ int main() {
     // Captura string para cópia
     printf("Insira a frase a ser copiada: ");
     fgets(phrase, sizeof(phrase), stdin);
+    while (getchar() != '\n');
     // Realiza a cópia das strings
     for (; phrase[len] != '\n'; len++) copy[len] = phrase[len];
     phrase[len] = '\0';

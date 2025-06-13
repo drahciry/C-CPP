@@ -19,6 +19,7 @@ int main() {
         // Captura palpite do usuário e incrementa tentativas
         printf("Palpite %d: ", ++attempts);
         scanf("%d", &choice);
+        getchar();
         // Retorna feedback para usuário sobre sua tentativa
         if (choice > secret) {
             printf("Seu palpite é maior que o número que estou pensando... Tente novamente!\n\n");

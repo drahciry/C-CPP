@@ -22,6 +22,7 @@ int main() {
     // Captura frase a ser analisada
     printf("\nInsira a frase a ser analisada: ");
     fgets(phrase, sizeof(phrase), stdin);
+    while (getchar() != '\n');
     // Remove '\n' do fim da frase e troca por '\0'
     phrase[strcspn(phrase, "\n")] = '\0';
     switch (option) {

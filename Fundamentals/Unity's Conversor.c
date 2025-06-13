@@ -47,8 +47,9 @@ int main() {
                 printf("Opção inserida inválida. Conversor de unidades encerrado.\n\n");
                 return 1;
             }
+            getchar();
             break;
-            case 2:
+        case 2:
             // Menu "interativo" para escolher qual unidade deseja converter
             printf(
                 "Deseja converter:\n"
@@ -73,8 +74,9 @@ int main() {
                 printf("Opção inserida inválida. Conversor de unidades encerrado.\n\n");
                 return 2;
             }
+            getchar();
             break;
-            case 3:
+        case 3:
             // Menu "interativo" para escolher qual unidade deseja converter
             printf(
                 "Deseja converter:\n"
@@ -99,6 +101,7 @@ int main() {
                 printf("Opção inserida inválida. Conversor de unidades encerrado.\n\n");
                 return 3;
             }
+            getchar();
             break;
         // Encerra o programa caso a entrada não seja válida
         default:

@@ -11,6 +11,7 @@ int main() {
     for (int i = 0; i < 5; i++) {
         printf("Insira o %dº elemento do array: ", i + 1);
         scanf("%d", &arr[i]);
+        getchar();
         // O primeiro elemento é maior e menor elemento do array
         if (!i) {
             min = arr[i];
