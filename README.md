@@ -14,6 +14,10 @@ My repository for algorithms and programing logical in programing language C/C++
 
 - I make programs using structures of control (switch-case, for, while, do-while) for show that I know this topic so important in programing.
 
-## Update 12/06/2025
+## Update 12/06/2025 - 1.1
 
 - I make programs showing that I know utilize arrays, strings and functions with recursion. These topic is very important for stable development in C/C++.
+
+## Update 12/06/2025 - 1.2
+
+- I was edited 'Phrase Analyzer' because I forgot the cases where vowels are capitalize. I append too new program with focus in strings. I plan to add more.
