@@ -28,23 +28,22 @@ int main() {
         // Conta vogais
         case 1:
             for (int i = 0; phrase[i] != '\0'; i++) {
-                switch (phrase[i]) {
-                case 'a':
-                    result++;
-                    break;
-                case 'e':
-                    result++;
-                    break;
-                case 'i':
-                    result++;
-                    break;
-                case 'o':
-                    result++;
-                    break;
-                case 'u':
-                    result++;
-                    break;                    
-                }
+                // Vogais minúsculas
+                if (
+                    phrase[i] == 'a' ||
+                    phrase[i] == 'e' ||
+                    phrase[i] == 'i' ||
+                    phrase[i] == 'o' ||
+                    phrase[i] == 'u'
+                ) result++;
+                // Vogais maiúsculas
+                if (
+                    phrase[i] == 'A' ||
+                    phrase[i] == 'E' ||
+                    phrase[i] == 'I' ||
+                    phrase[i] == 'O' ||
+                    phrase[i] == 'U'
+                ) result++;
             }
             break;
         // Conta espaços
