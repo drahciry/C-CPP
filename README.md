@@ -1,6 +1,6 @@
 # C-C++
 
-My repository for algorithms and programing logical in programing language C/C++. Only training.
+My repository for algorithms and programing logical in programing language C/C++. Only studying and training for show that I know programming in the low level.
 
 ## Update 10/06/2025 - 1.1
 
@@ -25,3 +25,7 @@ My repository for algorithms and programing logical in programing language C/C++
 ## Update 13/06/2025
 
 - I have created more programs for strings. There will be more programs with this focus.
+
+## Update 14/06/2025
+
+- Today is saturday, so I haven't implemented many programs. But, the programs that I made today demonstrate my knowledge in C a solid way.
