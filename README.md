@@ -29,3 +29,7 @@ My repository for algorithms and programing logical in programing language C/C++
 ## Update 14/06/2025
 
 - Today is saturday, so I haven't implemented many programs. But, the programs that I made today demonstrate my knowledge in C a solid way.
+
+## Update 15/06/2025
+
+- Implementation of alloc and realloc in C. I think that this topic is so important for understand low level in programming and made dynamic things.
