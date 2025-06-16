@@ -29,6 +29,9 @@ The learning process is ongoing. The next topics to be explored are:
 
 ## Changelog
 
+**June 16, 2025**
+* Added new program `Register People` with binary archive.
+
 **June 15, 2025**
 * Began the File I/O module, implementing basic CRUD operations with text files.
 * Implemented dynamic memory allocation using `malloc` and `realloc` to explore low-level memory management.
