@@ -1,35 +1,49 @@
-# C-C++
+# C & C++ Algorithm Studies
 
-My repository for algorithms and programing logical in programing language C/C++. Only studying and training for show that I know programming in the low level.
+A repository for studying and implementing algorithms and fundamental programming concepts in C and C++. The main goal is to document the learning process and build a solid foundation in low-level programming.
 
-## Update 10/06/2025 - 1.1
+## About This Repository
 
-- I make some programs only show what I know do, since basic to intermediary in C/C++. I expecting learning more in next weeks
+This project serves as a personal log of my journey learning C and C++. It contains a collection of programs, each designed to tackle a specific concept, ranging from basic syntax to more complex topics like memory management and file I/O. The focus is on demonstrating a clear understanding of the underlying mechanics of programming.
 
-## Update 10/06/2025 - 1.2
+## Topics Covered
 
-- I implementing some programs with fundamentals knowledge of programing in C/C++.
+This repository includes implementations and examples for the following topics:
 
-## Update 10/06/2025 - 1.3
+* **Programming Fundamentals:** Basic syntax, variables, data types, and operators.
+* **Control Structures:** Conditional statements (`if-else`, `switch-case`) and loops (`for`, `while`, `do-while`).
+* **Core Data Structures:** Working with arrays and handling strings.
+* **Functions:** Modularizing code with functions, including the use of **recursion**.
+* **Memory Management:** Understanding pointers and dynamic memory allocation with `malloc()` and `realloc()`.
+* **File I/O:** Performing CRUD (`Create`, `Read`, `Update`, `Delete`) operations on text files.
 
-- I make programs using structures of control (switch-case, for, while, do-while) for show that I know this topic so important in programing.
+## Future Goals
 
-## Update 12/06/2025 - 1.1
+The learning process is ongoing. The next topics to be explored are:
 
-- I make programs showing that I know utilize arrays, strings and functions with recursion. These topic is very important for stable development in C/C++.
+* Advanced file manipulation with **binary files**.
+* Implementation of fundamental **data structures** such as linked lists, stacks, and queues.
+* Deeper exploration of **C++ features**, including Object-Oriented Programming (OOP).
 
-## Update 12/06/2025 - 1.2
+---
 
-- I was edited 'Phrase Analyzer' because I forgot the cases where vowels are capitalize. I append too new program with focus in strings. I plan to add more.
+## Changelog
 
-## Update 13/06/2025
+**June 15, 2025**
+* Began the File I/O module, implementing basic CRUD operations with text files.
+* Implemented dynamic memory allocation using `malloc` and `realloc` to explore low-level memory management.
 
-- I have created more programs for strings. There will be more programs with this focus.
+**June 14, 2025**
+* Added new programs to further solidify core C concepts.
 
-## Update 14/06/2025
+**June 13, 2025**
+* Expanded the repository with more programs focused on string manipulation.
 
-- Today is saturday, so I haven't implemented many programs. But, the programs that I made today demonstrate my knowledge in C a solid way.
+**June 12, 2025**
+* Refactored 'Phrase Analyzer' to correctly handle uppercase vowels and added new string-focused examples.
+* Added programs demonstrating the use of arrays, strings, and recursive functions.
 
-## Update 15/06/2025
-
-- Implementation of alloc and realloc in C. I think that this topic is so important for understand low level in programming and made dynamic things.
+**June 10, 2025**
+* Added examples of control structures (`switch-case`, `for`, `while`, `do-while`).
+* Established programs covering the fundamental knowledge of C/C++.
+* Initialized the repository with programs covering basic to intermediate concepts.
