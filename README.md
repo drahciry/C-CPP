@@ -29,6 +29,9 @@ The learning process is ongoing. The next topics to be explored are:
 
 ## Changelog
 
+**June 17, 2025**
+* Added programs with binary archives. Now, the plan is only headers (`.h`) and algorithms and data structures.
+
 **June 16, 2025**
 * Added new program `Register People` with binary archive.
 
