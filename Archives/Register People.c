@@ -51,7 +51,7 @@ void writeFile(char* path, Person* p, int cap) {
     // Salva a quantidade de pessoas que serão salvas no arquivo
     fwrite(&cap, sizeof(int), 1, file);
     // Salva pessoas do tipo Person no arquivo aberto
-    for (int i = 0; i < cap; i++) fwrite(p + i, sizeof(Person), 1, file);
+    fwrite(p, sizeof(Person), cap, file);
     // Fecha arquivo
     fclose(file);
 }
@@ -64,6 +64,8 @@ Person* createPeople(int cap) {
         fprintf(stderr, "Erro: falha ao alocar memória!\n\n");
         exit(2);
     }
+    // Zera a memória
+    memset(p, 0, cap * sizeof(Person));
     // Retorna array de Person
     return p;
 }
@@ -84,9 +86,18 @@ void registerPerson(Person* p) {
 
 // Realoca array de Person
 void reallocPerson(Person** p, int* cap) {
+    // Declaração de variáveis
+    Person* temp;
+
+    // Dobra a capacidade do array
     *cap *= 2;
-    Person* temp = realloc(*p, *cap * sizeof(Person));
+    // Realoca no array temporário
+    temp = realloc(*p, *cap * sizeof(Person));
+    // Caso a realocação falhe, tenta reallocar até não falhar
     while (!temp) temp = realloc(*p, *cap * sizeof(Person));
+    // Zera a memória
+    memset(temp + (*cap / 2), 0, (*cap / 2) * sizeof(Person));
+    // Copia o array realocado
     *p = temp;
 }
 
@@ -115,11 +126,9 @@ int main() {
             case 1:
                 // Realoca memória caso esteja cheio
                 if (len >= cap - 1) {
-                    cap *= 2;
                     reallocPerson(&p, &cap);
                 }
-                registerPerson(p + len);
-                len++;
+                registerPerson(&p[len++]);
                 break;
             // Encerra programa
             case 0:
