@@ -113,7 +113,8 @@ int main() {
 
     printf("\n---------- Registro de Pessoas - Arquivo Binário ----------\n\n");
     // Menu "Interativo"
-    while (option != 0) {
+    while (option) {
+        option = -1;
         printf(
             "Opções disponíveis:\n"
             "[1] Registrar pessoa\n"
