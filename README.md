@@ -28,8 +28,12 @@ The learning process is ongoing. The next topics to be explored are:
 
 ## Changelog
 
+**June 18, 2025**
+* Implemented basic data structures concepts.
+* Added headers for stack and queue.
+
 **June 17, 2025**
-* Added programs with binary archives. Now, the plan is only headers (`.h`) and algorithms and data structures.
+* Added programs with binary archives.
 
 **June 16, 2025**
 * Added new program `Register People` with binary archive.
