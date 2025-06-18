@@ -21,7 +21,6 @@ This repository includes implementations and examples for the following topics:
 
 The learning process is ongoing. The next topics to be explored are:
 
-* Advanced file manipulation with **binary files**.
 * Implementation of fundamental **data structures** such as linked lists, stacks, and queues.
 * Deeper exploration of **C++ features**, including Object-Oriented Programming (OOP).
 
@@ -51,5 +50,5 @@ The learning process is ongoing. The next topics to be explored are:
 
 **June 10, 2025**
 * Added examples of control structures (`switch-case`, `for`, `while`, `do-while`).
-* Established programs covering the fundamental knowledge of C/C++.
+* Established programs covering the fundamental knowledge of C.
 * Initialized the repository with programs covering basic to intermediate concepts.
