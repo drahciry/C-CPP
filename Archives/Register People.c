@@ -99,6 +99,8 @@ void reallocPerson(Person** p, int* cap) {
     memset(temp + (*cap / 2), 0, (*cap / 2) * sizeof(Person));
     // Copia o array realocado
     *p = temp;
+    // Libera memória que temp usa
+    free(temp);
 }
 
 // Função principal (main)
