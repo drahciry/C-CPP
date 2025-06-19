@@ -28,8 +28,9 @@ The learning process is ongoing. The next topics to be explored are:
 
 ## Changelog
 
-** June 19, 2025**
+**June 19, 2025**
 * Implemented linked lists and queues and stacks with linked lists.
+* Implemented binary search tree and header for BST.
 
 **June 18, 2025**
 * Implemented basic data structures concepts.
