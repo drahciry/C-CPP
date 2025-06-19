@@ -28,6 +28,9 @@ The learning process is ongoing. The next topics to be explored are:
 
 ## Changelog
 
+** June 19, 2025**
+* Implemented linked lists and queues and stacks with linked lists.
+
 **June 18, 2025**
 * Implemented basic data structures concepts.
 * Added headers for stack and queue.
