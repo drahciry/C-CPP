@@ -1,62 +1,83 @@
-# C & C++ Algorithm Studies
+# 📌 C & C++ Algorithm Studies
 
-A repository for studying and implementing algorithms and fundamental programming concepts in C and C++. The main goal is to document the learning process and build a solid foundation in low-level programming.
-
-## About This Repository
-
-This project serves as a personal log of my journey learning C and C++. It contains a collection of programs, each designed to tackle a specific concept, ranging from basic syntax to more complex topics like memory management and file I/O. The focus is on demonstrating a clear understanding of the underlying mechanics of programming.
-
-## Topics Covered
-
-This repository includes implementations and examples for the following topics:
-
-* **Programming Fundamentals:** Basic syntax, variables, data types, and operators.
-* **Control Structures:** Conditional statements (`if-else`, `switch-case`) and loops (`for`, `while`, `do-while`).
-* **Core Data Structures:** Working with arrays and handling strings.
-* **Functions:** Modularizing code with functions, including the use of **recursion**.
-* **Memory Management:** Understanding pointers and dynamic memory allocation with `malloc()` and `realloc()`.
-* **File I/O:** Performing CRUD (`Create`, `Read`, `Update`, `Delete`) operations on text files.
-
-## Future Goals
-
-The learning process is ongoing. The next topics to be explored are:
-
-* Implementation of fundamental **data structures** such as linked lists, stacks, and queues.
-* Deeper exploration of **C++ features**, including Object-Oriented Programming (OOP).
+A repository dedicated to studying and implementing **data structures**, **classic algorithms**, and core programming concepts using **C and C++**. The main goal is to document the learning process and build a solid foundation in low-level programming and problem-solving.
 
 ---
 
-## Changelog
+## 🎯 About This Repository
 
-**June 19, 2025**
-* Implemented linked lists and queues and stacks with linked lists.
-* Implemented binary search tree and header for BST.
+This project serves as a **learning log** for mastering C (and soon C++).  
+Each directory or file focuses on a specific concept — from syntax basics to advanced memory management, binary file handling, linked lists, trees, and sorting algorithms.
 
-**June 18, 2025**
-* Implemented basic data structures concepts.
-* Added headers for stack and queue.
+---
 
-**June 17, 2025**
-* Added programs with binary archives.
+## ✅ Topics Covered So Far
 
-**June 16, 2025**
-* Added new program `Register People` with binary archive.
+- **Programming Fundamentals:** Basic syntax, data types, operators, and scope.
+- **Control Structures:** `if-else`, `switch-case`, `for`, `while`, `do-while`.
+- **String Handling:** Operations with `<string.h>`, dynamic input.
+- **Pointers & Dynamic Memory:** Using `malloc()`, `realloc()`, manual memory management.
+- **File I/O:** Text and binary file operations, `fopen`, `fread`, `fwrite`, `fseek`, `ftell`, `rewind`.
+- **Classic Data Structures:**
+  - **Stack:** Implemented with arrays and linked lists.
+  - **Queue:** Linear array, circular array, and linked list.
+  - **Linked Lists:** Single, double, circular linked lists.
+  - **Trees:** Binary Search Tree (BST) with search, insertion, deletion, and traversal.
+- **Sorting Algorithms:**
+  - **Bubble Sort**
+  - **Insertion Sort**
+  - **Merge Sort** (recursive and optimized)
 
-**June 15, 2025**
-* Began the File I/O module, implementing basic CRUD operations with text files.
-* Implemented dynamic memory allocation using `malloc` and `realloc` to explore low-level memory management.
+---
 
-**June 14, 2025**
-* Added new programs to further solidify core C concepts.
+## 🚀 Next Goals
 
-**June 13, 2025**
-* Expanded the repository with more programs focused on string manipulation.
+> The learning journey continues! Next up:
 
-**June 12, 2025**
-* Refactored 'Phrase Analyzer' to correctly handle uppercase vowels and added new string-focused examples.
-* Added programs demonstrating the use of arrays, strings, and recursive functions.
+- 📌 **AVL & Red-Black Trees:** Theoretical understanding done, implementation is optional for now.
+- ⚙️ **Macros with `#define`** and preprocessor best practices.
+- 🪲 **Proper error handling using `errno` and `perror` for robust debugging.**
+- 🗂️ **Header file documentation with clear comments and structure.**
+- ✅ **Unit tests with `<assert.h>`.**
+- ⚡ **Getting started with modern C++:**
+  - Syntax essentials
+  - Classes and OOP
+  - Templates and the STL
+  - Differences and similarities with C
+- 📂 **Automated builds with Makefile.**
 
-**June 10, 2025**
-* Added examples of control structures (`switch-case`, `for`, `while`, `do-while`).
-* Established programs covering the fundamental knowledge of C.
-* Initialized the repository with programs covering basic to intermediate concepts.
+---
+
+## 📅 Changelog
+
+| Date | Updates |
+|------|---------|
+| **June 19, 2025** | Finished stacks & queues with linked lists; BST with search, insert, delete, traversals; improved Merge Sort. |
+| **June 18, 2025** | Full modularization with `.h` + `.c`; examples of unit tests and initial Makefile. |
+| **June 17, 2025** | Binary file CRUD with `fseek`, `ftell`, `rewind`. |
+| **June 16, 2025** | `Register People` system saved in binary format with random access reading. |
+| **June 15, 2025** | CRUD with text files; robust dynamic input handling. |
+| **June 14, 2025** | Deep dive into pointers, `malloc`, `realloc`, strings. |
+| **June 13, 2025** | String utilities cleanup and new examples. |
+| **June 12, 2025** | Programs on arrays, strings, recursion. |
+| **June 10, 2025** | Repository initiated: basic syntax, control flow, C fundamentals. |
+
+---
+
+## 🤝 Contribution
+
+This is a personal study project, but suggestions and improvements are always welcome.  
+**Pull requests** for documentation improvements or bug fixes will be reviewed.
+
+---
+
+## 📢 Status
+
+> ✅ **C: solid foundation built (advanced data structures covered).**  
+> 🏃 **Next: modern C++ + OOP + design patterns.**
+
+---
+
+## 💪 Let’s keep coding!
+
+---
