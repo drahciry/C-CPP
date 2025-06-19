@@ -37,6 +37,7 @@ typedef struct {
 CycleDoubleLL* createLL() {
     // Declaração de variáveis
     CycleDoubleLL* ll = malloc(sizeof(CycleDoubleLL));
+    // Retorna erro caso alocação falhe
     if (!ll) MallocError();
     
     // Cabeça e rabo são nulos
@@ -77,6 +78,7 @@ void insertStart(CycleDoubleLL* ll, int value) {
 void insertEnd(CycleDoubleLL* ll, int value) {
     // Declaração de variáveis
     Node* n = malloc(sizeof(Node));
+    // Retorna erro caso alocação falhe
     if (!n) MallocError();
 
     // Guarda valor no nó
