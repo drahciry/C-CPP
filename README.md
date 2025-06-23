@@ -48,7 +48,7 @@ Each directory or file focuses on a specific concept — from syntax basics to a
 
 ---
 
-## 📅 Changelog
+## Changelog
 
 | Date | Updates |
 |------|---------|
