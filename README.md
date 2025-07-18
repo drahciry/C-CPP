@@ -22,10 +22,7 @@ Each directory or file focuses on a specific concept — from syntax basics to a
 
 > The learning journey continues! Next up:
 
-- 📌 **AVL & Red-Black Trees:** Theoretical understanding done, implementation is optional for now.
-- ⚙️ **Macros with `#define`** and preprocessor best practices.
 - 🪲 **Proper error handling using `errno` and `perror` for robust debugging.**
-- 🗂️ **Header file documentation with clear comments and structure.**
 - ✅ **Unit tests with `<assert.h>`.**
 - ⚡ **Getting started with modern C++:**
   - Syntax essentials
