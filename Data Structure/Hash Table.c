@@ -18,7 +18,7 @@ typedef struct {
 
 bool isPrime(unsigned long long num) {
     if (num == 1) return false;
-    for (unsigned long long divisor = 0; divisor * divisor <= num; divisor++)
+    for (unsigned long long divisor = 2; divisor * divisor <= num; divisor++)
         if (num % divisor == 0) return false;
     return true;
 }
@@ -186,4 +186,8 @@ bool deleteItem(HashTable* hash_table, char* key) {
         }
     }
     return false;
+}
+
+int main() {
+    return 0;
 }
