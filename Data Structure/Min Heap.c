@@ -7,18 +7,18 @@ typedef struct {
 } MinHeap;
 
 void swap(int* a, int* b) {
-    int* temp = *a;
+    int temp = *a;
     *a = *b;
     *b = temp;
 }
 
 void heapify_up(MinHeap* heap, int idx) {
     while (idx > 0) {
-      int parent = (idx - 1) / 2;
-      if (heap->data[idx] < heap->data[parent]) {
-          swap(&heap->data[idx], &heap->data[parent]);
-          idx = parent;
-      } else break;
+        int parent = (idx - 1) / 2;
+        if (heap->data[idx] < heap->data[parent]) {
+            swap(&heap->data[idx], &heap->data[parent]);
+            idx = parent;
+        } else break;
     }
 }
 
@@ -28,9 +28,9 @@ void heapify_down(MinHeap* heap, int idx) {
     int right = idx * 2 + 2;
 
     if (left < heap->size && heap->data[left] < heap->data[smallest])
-      smallest = left;
+        smallest = left;
     if (right < heap->size && heap->data[right] < heap->data[smallest])
-      smallest = right;
+        smallest = right;
 
     if (smallest != idx) {
         swap(&heap->data[idx], &heap->data[smallest]);
@@ -39,8 +39,8 @@ void heapify_down(MinHeap* heap, int idx) {
 }
 
 void push(MinHeap* heap, int value) {
-    if (heap->size == cap) return;
-    heap->data[size++] = value;
+    if (heap->size == heap->cap) return;
+    heap->data[heap->size++] = value;
     heapify_up(heap, heap->size - 1);
 }
 
@@ -66,4 +66,8 @@ MinHeap* create_heap(int cap) {
 void delete_heap(MinHeap* heap) {
     free(heap->data);
     free(heap);
+}
+
+int main() {
+    return 0;
 }
