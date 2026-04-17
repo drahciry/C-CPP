@@ -1,16 +1,17 @@
-// Includes
 #include <stdlib.h>
 
-// Bubble Sort
-void BubbleSort(int* arr, int len) {
-    int changed, temp;
-    for (int i = 0; i < len; i++) {
-        changed = 0;
-        for (int j = 0; j < len - i - 1; j++) {
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void bubble_sort(int* arr, int left, int right) {
+    for (int i = left; i <= right; i++) {
+        int changed = 0;
+        for (int j = left; j <= right - i - 1; j++) {
             if (arr[j] > arr[j + 1]) {
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+                swap(&arr[j], &arr[j + 1]);
                 changed = 1;
             }
         }
@@ -18,14 +19,12 @@ void BubbleSort(int* arr, int len) {
     }
 }
 
-// Insertion Sort
-void InsertionSort(int* arr, int len) {
-    int key, j;
-    for (int i = 1; i < len; i++) {
-        key = arr[i];
-        j = i - 1;
+void insertion_sort(int* arr, int left, int right) {
+    for (int i = left + 1; i <= right; i++) {
+        int key = arr[i];
+        int j = i - 1;
 
-        while (j >= 0 && arr[j] > key) {
+        while (j >= left && arr[j] > key) {
             arr[j + 1] = arr[j];
             j--;
         }
@@ -33,42 +32,49 @@ void InsertionSort(int* arr, int len) {
     }
 }
 
-// Merge Sort
-void Merge(int* arr, int* aux, int left, int mid, int right) { 
+void merge(int* arr, int* temp, int left, int mid, int right) {
     int i = left;
-    int j = mid + 1;
     int k = left;
+    int j = mid + 1;
 
-    while (i <= mid && j <= right) {
-        if (arr[i] <= arr[j]) aux[k++] = arr[i++];
-        else aux[k++] = arr[j++];
-    }
+    while (i <= mid && j <= right)
+        if (arr[i] < arr[j])
+            temp[k++] = arr[i++];
+        else
+            temp[k++] = arr[j++];
 
-    while (i <= mid) aux[k++] = arr[i++];
+    while (i <= mid)
+        temp[k++] = arr[i++];
 
-    while (j <= right) aux[k++] = arr[j++];
+    while (j <= right)
+        temp[k++] = arr[j++];
 
-    for (int l = left; l <= right; l++) arr[l] = aux[l];
+    for (k = left; k <= right; k++)
+        arr[k] = temp[k];
 }
 
-void MergeSortRec(int* arr, int* aux, int left, int right) {
+void merge_recursive(int* arr, int* temp, int left, int right) {
     if (left >= right) return;
 
+    if (right - left + 1 <= 10) {
+        insertion_sort(arr, left, right);
+        return;
+    }
+
     int mid = left + (right - left) / 2;
+    merge_recursive(arr, temp, left, mid);
+    merge_recursive(arr, temp, mid + 1, right);
 
-    MergeSortRec(arr, aux, left, mid);
-    MergeSortRec(arr, aux, mid + 1, right);
-    Merge(arr, aux, left, mid, right);
+    merge(arr, temp, left, mid, right);
 }
 
-void MergeSort(int* arr, int len) {
-    int* aux = malloc(len * sizeof(int));
-    if (!aux) return;
-    MergeSortRec(arr, aux, 0, len - 1);
-    free(aux);
+void merge_sort(int* arr, int size) {
+    int* temp = (int*)malloc(size * sizeof(int));
+    if (temp == NULL) return;
+    merge_recursive(arr, temp, 0, size - 1);
+    free(temp);
 }
 
-// Função principal (main)
 int main() {
     return 0;
 }
