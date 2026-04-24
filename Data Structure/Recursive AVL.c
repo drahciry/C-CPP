@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
-#define GET_HEIGHT(n) ((n) == NULL ? -1 : (n)->height)
-
 typedef struct Node {
     int data;
     int count;
@@ -16,6 +13,15 @@ typedef struct Node {
 typedef struct {
     Node* root;
 } Tree;
+
+static inline int MAX(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+static inline int GET_HEIGHT(Node* node) {
+    if (node) return node->height;
+    else return -1;
+}
 
 bool empty(Tree* avl) {
     return (avl == NULL || avl->root == NULL);
@@ -91,7 +97,7 @@ Node* _insert(Node* node, int value) {
         return rotate_right(node);
     }
 
-    if (balance < -1 && value < node->left->data) {
+    if (balance < -1 && value < node->right->data) {
         node->right = rotate_right(node->right);
         return rotate_left(node);
     }
@@ -136,8 +142,8 @@ Node* _remove(Node* node, int value) {
             Node* temp = get_predecessor(node->left);
 
             node->data = temp->data;
-            node->data = temp->count;
-            
+            node->count = temp->count;
+
             temp->count = 1;
             node->left = _remove(node->left, temp->data);
         }
@@ -146,21 +152,21 @@ Node* _remove(Node* node, int value) {
     if (node == NULL) return node;
 
     node->height = MAX(GET_HEIGHT(node->left), GET_HEIGHT(node->right)) + 1;
-    
+
     int balance = get_balance(node);
 
     if (balance > 1 && get_balance(node->left) >= 0)
         return rotate_right(node);
 
-    if (balance < -1 && get_balance(node->left) < 0)
+    if (balance < -1 && get_balance(node->right) < 0)
         return rotate_left(node);
 
-    if (balance > 1 && get_balance(node->right) <= 0) {
+    if (balance > 1 && get_balance(node->left) <= 0) {
         node->left = rotate_left(node->left);
         return rotate_right(node);
     }
 
-    if (balance < -1 && get_balance > 0) {
+    if (balance < -1 && get_balance(node->right) > 0) {
         node->right = rotate_right(node->right);
         return rotate_left(node);
     }
@@ -172,20 +178,27 @@ void remove_avl(Tree* avl, int value) {
     if (!empty(avl)) avl->root = _remove(avl->root, value);
 }
 
-bool search(Tree* avl, int value) {
+bool search(Tree* avl, int value, int* height) {
+    if (avl == NULL) {
+        if (height != NULL) *height = -1;
+        return false;
+    }
+
     Node* current = avl->root;
 
-    while (current && current->data != value)
+    while (current != NULL && current->data != value)
         if (value < current->data)
             current = current->left;
         else
             current = current->right;
 
+    if (height != NULL) *height = GET_HEIGHT(current);
     return (current != NULL);
 }
 
-int height(Tree* avl) {
-    return avl->root->height;
+int get_height(Tree* avl) {
+    if (!empty(avl)) return avl->root->height;
+    return -1;
 }
 
 void _in_order(Node* node) {
@@ -197,11 +210,8 @@ void _in_order(Node* node) {
 }
 
 void in_order(Tree* avl) {
-    if (empty(avl)) {
-        printf("Tree is empty!\n");
-        return;
-    }
-    _in_order(avl->root);
+    if (!empty(avl)) _in_order(avl->root);
+    else printf("Tree is empty!");
     printf("\n");
 }
 
@@ -214,11 +224,8 @@ void _pre_order(Node* node) {
 }
 
 void pre_order(Tree* avl) {
-    if (empty(avl)) {
-        printf("Tree is empty!\n");
-        return;
-    }
-    _pre_order(avl->root);
+    if (!empty(avl)) _pre_order(avl->root);
+    else printf("Tree is empty!");
     printf("\n");
 }
 
@@ -231,11 +238,8 @@ void _post_order(Node* node) {
 }
 
 void post_order(Tree* avl) {
-    if (empty(avl)) {
-        printf("Tree is empty!\n");
-        return;
-    }
-    _post_order(avl->root);
+    if (!empty(avl)) _post_order(avl->root);
+    else printf("Tree is empty!");
     printf("\n");
 }
 
@@ -254,6 +258,12 @@ void delete_node(Node* node) {
 }
 
 void delete_avl(Tree* avl) {
-    delete_node(avl->root);
-    free(avl);
+    if (avl != NULL) {
+        delete_node(avl->root);
+        free(avl);
+    }
+}
+
+int main() {
+    return 0;
 }
