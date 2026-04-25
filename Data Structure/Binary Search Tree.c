@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
+static inline int MAX(int a, int b) {
+    return (a > b) ? a : b;
+}
 
 typedef struct Node {
     int data;
