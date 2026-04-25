@@ -21,6 +21,17 @@ bool empty(Tree* bst) {
     return (bst == NULL || bst->root == NULL);
 }
 
+Node* create_node(int value) {
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    if (new_node) {
+        new_node->data = value;
+        new_node->count = 1;
+        new_node->left = NULL;
+        new_node->right = NULL;
+    }
+    return new_node;
+}
+
 void _insert(Node** node, int value) {
     Node** current = node;
 
@@ -138,17 +149,6 @@ void post_order(Tree* bst) {
     if (!empty(bst)) _post_order(bst->root);
     else printf("Tree is empty!");
     printf("\n");
-}
-
-Node* create_node(int value) {
-    Node* new_node = (Node*)malloc(sizeof(Node));
-    if (new_node) {
-        new_node->data = value;
-        new_node->count = 1;
-        new_node->left = NULL;
-        new_node->right = NULL;
-    }
-    return new_node;
 }
 
 Tree* create_bst() {
