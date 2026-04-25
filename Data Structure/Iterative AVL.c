@@ -146,41 +146,93 @@ void insert_avl(Tree* avl, int value) {
 }
 
 void remove_avl(Tree* avl, int value) {
-    Node* current = avl->root;
-    Node* parent = NULL;
+    if (empty(avl)) return;
 
-    while (current && current->data != value) {
-        parent = current;
-        if (value < current->data)
-            current = current->left;
+    Node* target = avl->root;
+    while (target && target->data != value)
+        if (value < target->data)
+            target = target->left;
         else
-            current = current->right;
+            target = target->right;
+
+    if (target == NULL) return;
+    
+    if (target->count > 1) {
+        target->count--;
+        return;
     }
 
-    if (current == NULL) return;
-    if ((--current->count) > 0) return;
+    Node* balance_start = NULL;
 
-    Node* target = current;
-    if (!target->left) {
-        current = target->right;
-        free(target);
-    } else if (!target->right) {
-        current = target->left;
+    if (target->left == NULL || target->right == NULL) {
+        Node* child = target->left ? target->left : target->right;
+
+        if (child != NULL)
+            child->parent = target->parent;
+
+        if (target->parent == NULL)
+            avl->root = child;
+        else if (target == target->parent->left)
+            target->parent->left = child;
+        else
+            target->parent->right = child;
+
+        balance_start = target->parent;
         free(target);
     } else {
-        Node* predecessor = current->left;
+        Node* predecessor = target->left;
         while (predecessor->right) predecessor = predecessor->right;
 
         target->data = predecessor->data;
         target->count = predecessor->count;
 
-        Node* temp = predecessor;
-        predecessor = predecessor->left;
-        free(temp);
+        Node* child = predecessor->left;
+
+        if (child != NULL)
+            child->parent = predecessor->parent;
+
+        if (predecessor->parent == target)
+            predecessor->parent->left = child;
+        else
+            predecessor->parent->right = child;
+
+        balance_start = predecessor->parent;
+        free(predecessor);
+    }
+
+    Node* walker = balance_start;
+
+    while (walker != NULL) {
+        walker->height = MAX(GET_HEIGHT(walker->left), GET_HEIGHT(walker->right)) + 1;
+
+        int balance = get_balance(walker);
+
+        if (balance > 1 && get_balance(walker->left) >= 0)
+            rotate_right(avl, walker);
+
+        else if (balance < -1 && get_balance(walker->right) <= 0)
+            rotate_left(avl, walker);
+
+        else if (balance > 1 && get_balance(walker->left) < 0) {
+            rotate_left(avl, walker->left);
+            rotate_right(avl, walker);
+        }
+
+        else if (balance < -1 && get_balance(walker->right) > 0) {
+            rotate_right(avl, walker->right);
+            rotate_left(avl, walker);
+        }
+
+        walker = walker->parent;
     }
 }
 
-bool search(Tree* avl, int value) {
+bool search(Tree* avl, int value, int* height) {
+    if (avl == NULL) {
+        if (height != NULL) *height = -1;
+        return false;
+    }
+
     Node* current = avl->root;
 
     while (current != NULL && current->data != value)
@@ -189,6 +241,7 @@ bool search(Tree* avl, int value) {
         else
             current = current->right;
 
+    if (height != NULL) *height = GET_HEIGHT(current);
     return (current != NULL);
 }
 
