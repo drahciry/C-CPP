@@ -51,11 +51,8 @@ void _remove(Node** node, int value) {
         else
             current = &((*current)->right);
 
-    if (*current)
-        (*current)->count--;
-
-    if ((*current)->count > 0)
-        return;
+    if (*current == NULL) return;
+    if ((--(*current)->count) > 0) return;
 
     Node* target = *current;
     if (!target->left) {
