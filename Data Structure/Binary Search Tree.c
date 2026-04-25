@@ -9,7 +9,6 @@ static inline int MAX(int a, int b) {
 typedef struct Node {
     int data;
     int count;
-    int height;
     struct Node* left;
     struct Node* right;
 } Node;
@@ -36,17 +35,11 @@ void _insert(Node** node, int value) {
         return;
     }
 
-    *current = (Node*)malloc(sizeof(Node));
-    if (!(*current)) return;
-    (*current)->data = value;
-    (*current)->count = 1;
-    (*current)->left = NULL;
-    (*current)->right = NULL;
+    *current = create_node(value);
 }
 
 void insert_bst(Tree* bst, int value) {
-    if (!bst) return;
-    _insert(&(bst->root), value);
+    if (bst != NULL) _insert(&(bst->root), value);
 }
 
 void _remove(Node** node, int value) {
@@ -58,15 +51,18 @@ void _remove(Node** node, int value) {
         else
             current = &((*current)->right);
 
-    if (!(*current)) return;
-    if ((--(*current)->count) > 0) return; 
+    if (*current)
+        (*current)->count--;
+
+    if ((*current)->count > 0)
+        return;
 
     Node* target = *current;
-    if (!(*current)->left) {
-        *current = target->right;
+    if (!target->left) {
+        current = &(target->right);
         free(target);
-    } else if (!(*current)->right) {
-        *current = target->left;
+    } else if (!target->right) {
+        current = &(target->left);
         free(target);
     } else {
         Node** predecessor = &((*current)->left);
@@ -82,14 +78,13 @@ void _remove(Node** node, int value) {
 }
 
 void remove_bst(Tree* bst, int value) {
-    if (empty(bst)) return;
-    _remove(&(bst->root), value);
+    if (!empty(bst)) _remove(&(bst->root), value);
 }
 
 bool search(Tree* bst, int value) {
     Node* current = bst->root;
 
-    while (current && current->data != value)
+    while (current != NULL && current->data != value)
         if (value < current->data)
             current = current->left;
         else
@@ -99,12 +94,11 @@ bool search(Tree* bst, int value) {
 }
 
 int _height(Node* node) {
-    if (!node) return 0;
-    return (1 + MAX(_height(node->left), _height(node->right)));
+    return (node == NULL) ? -1 : MAX(_height(node->left), _height(node->right)) + 1;
 }
 
 int height(Tree* bst) {
-    return _height(bst->root);
+    return (empty(bst)) ? -1 : _height(bst->root);
 }
 
 void _in_order(Node* node) {
@@ -116,11 +110,8 @@ void _in_order(Node* node) {
 }
 
 void in_order(Tree* bst) {
-    if (empty(bst)) {
-        printf("Tree is empty!\n");
-        return;
-    }
-    _in_order(bst->root);
+    if (!empty(bst)) _in_order(bst->root);
+    else printf("Tree is empty!");
     printf("\n");
 }
 
@@ -133,11 +124,8 @@ void _pre_order(Node* node) {
 }
 
 void pre_order(Tree* bst) {
-    if (empty(bst)) {
-        printf("Tree is empty!\n");
-        return;
-    }
-    _pre_order(bst->root);
+    if (!empty(bst)) _pre_order(bst->root);
+    else printf("Tree is empty!");
     printf("\n");
 }
 
@@ -150,18 +138,27 @@ void _post_order(Node* node) {
 }
 
 void post_order(Tree* bst) {
-    if (empty(bst)) {
-        printf("Tree is empty!\n");
-        return;
-    }
-    _post_order(bst->root);
+    if (!empty(bst)) _post_order(bst->root);
+    else printf("Tree is empty!");
     printf("\n");
+}
+
+Node* create_node(int value) {
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    if (new_node) {
+        new_node->data = value;
+        new_node->count = 1;
+        new_node->left = NULL;
+        new_node->right = NULL;
+    }
+    return new_node;
 }
 
 Tree* create_bst() {
     Tree* bst = (Tree*)malloc(sizeof(Tree));
-    if (bst)
+    if (bst) {
         bst->root = NULL;
+    }
     return bst;
 }
 
@@ -176,4 +173,8 @@ void delete_node(Node* node) {
 void delete_bst(Tree* bst) {
     delete_node(bst->root);
     free(bst);
+}
+
+int main() {
+    return 0;
 }
