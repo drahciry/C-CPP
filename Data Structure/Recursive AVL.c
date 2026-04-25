@@ -264,6 +264,15 @@ void delete_avl(Tree* avl) {
     }
 }
 
+void print_tree(Node* node, int level) {
+    if (node) {
+        print_tree(node->right, level + 1);
+        for (int i = 0; i < level; i++) printf("    ");
+        printf("%d\n", node->data);
+        print_tree(node->left, level + 1);
+    }
+}
+
 int main() {
     return 0;
 }
