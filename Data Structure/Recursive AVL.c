@@ -89,15 +89,15 @@ Node* _insert(Node* node, int value) {
     if (balance > 1 && value < node->left->data)
         return rotate_right(node);
 
-    if (balance < -1 && value > node->right->data)
+    else if (balance < -1 && value > node->right->data)
         return rotate_left(node);
 
-    if (balance > 1 && value > node->left->data) {
+    else if (balance > 1 && value > node->left->data) {
         node->left = rotate_left(node->left);
         return rotate_right(node);
     }
 
-    if (balance < -1 && value < node->right->data) {
+    else if (balance < -1 && value < node->right->data) {
         node->right = rotate_right(node->right);
         return rotate_left(node);
     }
@@ -158,15 +158,15 @@ Node* _remove(Node* node, int value) {
     if (balance > 1 && get_balance(node->left) >= 0)
         return rotate_right(node);
         
-    if (balance > 1 && get_balance(node->left) < 0) {
+    else if (balance > 1 && get_balance(node->left) < 0) {
         node->left = rotate_left(node->left);
         return rotate_right(node);
     }
 
-    if (balance < -1 && get_balance(node->right) <= 0)
+    else if (balance < -1 && get_balance(node->right) <= 0)
         return rotate_left(node);
 
-    if (balance < -1 && get_balance(node->right) > 0) {
+    else if (balance < -1 && get_balance(node->right) > 0) {
         node->right = rotate_right(node->right);
         return rotate_left(node);
     }
