@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 /* Auxiliary functions */
@@ -129,6 +130,20 @@ int partition(int* arr, int left, int right) {
     }
 }
 
+/*
+ * Algorithm: Get Maximum Value in Array
+ * Time Complexity: O(N)
+ * Memory Complexity: O(1)
+ */
+
+int get_max(int* arr, int size) {
+    int max_val = arr[0];
+    for (int i = 1; i < size; i++)
+        if (arr[i] > max_val)
+            max_val = arr[i];
+    return max_val;
+}
+
 /* Sort Functions */
 
 /*
@@ -212,11 +227,11 @@ void merge_sort(int* arr, int size) {
 
 void heap_sort_iterative(int* arr, int size) {
     for (int i = size / 2 - 1; i >= 0; i--)
-        heapify_down_iterative(arr, size, i);
+        heapify_arr(arr, size, i);
 
     for (int i = size - 1; i > 0; i--) {
         swap(&arr[0], &arr[i]);
-        heapify_down_iterative(arr, i, 0);
+        heapify_arr(arr, i, 0);
     }
 }
 
@@ -309,6 +324,56 @@ void _hybrid_sort(int* arr, int left, int right) {
 
 void hybrid_sort(int* arr, int size) {
     if (size > 1) _hybrid_sort(arr, 0, size - 1);
+}
+
+/*
+ * Algorithm: Radix Sort
+ * Time Complexity: O(d x N) - d is the number of digits of the largest value
+ * Memory Complexity: O(N)
+ */
+
+void counting_sort_digit(int* arr, int left, int right, int exp) {
+    int size = right - left + 1;
+
+    int* output = (int*)malloc(size * sizeof(int));
+    if (output == NULL) return;
+
+    int count[10] = {0};
+
+    for (int i = left; i <= right; i++) {
+        int current_digit = (arr[i] / exp) % 10;
+        count[current_digit]++;
+    }
+
+    for (int i = 1; i < 10; i++)
+        count[i] += count[i - 1];
+
+    for (int i = right; i >= left; i--) {
+        int current_digit = (arr[i] / exp) % 10;
+
+        int output_idx = count[current_digit] - 1;
+        output[output_idx] = arr[i];
+        
+        count[current_digit]--;
+    }
+
+    for (int i = left; i <= right; i++)
+        arr[i] = output[i - left];
+
+    free(output);
+}
+
+void _radix_sort(int* arr, int left, int right) {
+    if (left >= right) return;
+
+    int max_val = get_max(arr, right - left + 1);
+
+    for (int exp = 1; max_val / exp > 0; exp *= 10)
+        counting_sort_digit(arr, left, right, exp);
+}
+
+void radix_sort(int* arr, int size) {
+    if (size > 1) _radix_sort(arr, 0, size - 1);
 }
 
 /*
