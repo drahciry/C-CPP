@@ -6,6 +6,8 @@ void swap(int* a, int* b) {
     *b = temp;
 }
 
+/* BUBBLE SORT */
+
 void bubble_sort(int* arr, int left, int right) {
     for (int i = left; i <= right; i++) {
         int changed = 0;
@@ -19,6 +21,8 @@ void bubble_sort(int* arr, int left, int right) {
     }
 }
 
+/* INSERTION SORT */
+
 void insertion_sort(int* arr, int left, int right) {
     for (int i = left + 1; i <= right; i++) {
         int key = arr[i];
@@ -31,6 +35,8 @@ void insertion_sort(int* arr, int left, int right) {
         arr[j + 1] = key;
     }
 }
+
+/* MERGE SORT */
 
 void merge(int* arr, int* temp, int left, int mid, int right) {
     int i = left;
@@ -73,6 +79,52 @@ void merge_sort(int* arr, int size) {
     if (temp == NULL) return;
     merge_recursive(arr, temp, 0, size - 1);
     free(temp);
+}
+
+/* HEAP SORT */
+
+void heapify_down_iterative(int* arr, int size, int idx) {
+    int largest;
+    int left;
+    int right;
+
+    while (1) {
+        largest = idx;
+        left = idx * 2 + 1;
+        right = idx * 2 + 2;
+
+        if (left < size && arr[left] > arr[largest])
+            largest = left;
+        if (right < size && arr[right] > arr[largest])
+            largest = right;
+
+        if (largest == idx) break;
+
+        swap(&arr[idx], &arr[largest]);
+        idx = largest;
+    }
+}
+
+void heap_sort(int* arr, int size) {
+    for (int i = size / 2 - 1; i >= 0; i--)
+        heapify_down_iterative(arr, size, i);
+
+    for (int i = size - 1; i > 0; i--) {
+        swap(&arr[0], &arr[i]);
+        heapify_down_iterative(arr, i, 0);
+    }
+}
+
+/* CYCLE SORT */
+
+void cycle_sort(int* arr, int left, int right) {
+    int i = left;
+
+    while (i < right) {
+        if (arr[i] >= left && arr[i] <= right && arr[arr[i]] != arr[i])
+            swap(&arr[i], &arr[arr[i]]);
+        else i++;
+    }
 }
 
 int main() {
